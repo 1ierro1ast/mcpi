@@ -15,4 +15,9 @@ def _misc_to_bytes(m):
 
     See `Connection.send` for more details.
     """
-    return str(m).encode("cp437")
+    try:
+        return str(m).encode("cp1251")
+    except UnicodeEncodeError:
+        return str(m).encode("cp437")
+    except RequestError:
+        return str(m).encode("cp437")
